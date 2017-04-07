@@ -1,0 +1,26 @@
+<% include ../header.ejs %>
+
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>제목</th>
+            <th>작성일</th>
+            <th>삭제</th>
+        </tr>
+        <% posts.forEach( function(post){ %>
+        <tr>
+            <td><a href="/posts/detail/<%=post.id%>"><%=post.title%></a></td>
+            <td>
+                <%=post.getDate.year%> - 
+                <%=post.getDate.month%> -
+                <%=post.getDate.day%>
+            </td>
+            <td>
+                <a href="/posts/delete/<%=post.id%>" class="btn btn-danger" onclick="return confirm('삭제하시겠습니까?')">삭제</a>
+            </td>
+        </tr>
+        <%});%>
+    </table>
+
+    <a href="/posts/write" class="btn btn-default">작성하기</a>
+
+<% include ../footer.ejs %>
