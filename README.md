@@ -14,6 +14,9 @@ POST /posts/edit/:id<br />
 
 GET /posts/delete/:id => 글삭제<br />
 
+GET /posts/ajax_comment/insert => 댓글 추가<br />
+GET /posts/ajax_comment/delete => 댓글 삭제<br />
+
 
 ### Model
 
@@ -21,6 +24,11 @@ Post
 - title : 글제목
 - content : 글 내용
 - created_at : 작성일
+
+Comment
+- content : 댓글 내용
+- created_at : 작성일
+- post_id : Post의 id
 
 ### View
 
