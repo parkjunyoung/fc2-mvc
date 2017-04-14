@@ -13,6 +13,13 @@
                     <%=post.getDate.month%> -
                     <%=post.getDate.day%>
             </div>
+            
+            <% if(post.thumbnail){%>
+            <p>
+                <img src="/uploads/<%=post.thumbnail%>" style="max-width: 100%"/>
+            </p>
+            <% } %>
+
             <%=post.content%>
 
             <hr />
