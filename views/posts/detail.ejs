@@ -29,6 +29,7 @@
             <div>
                 댓글작성하기
                 <form id="commentForm" action="" method="post">
+                    <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
                     <input type="hidden" name="post_id" value="<%=post.id%>" />
                     <textarea class="form-control" name="content"></textarea>
                     <button class="btn btn-primary" style="margin-top: 10px">댓글작성</button>
