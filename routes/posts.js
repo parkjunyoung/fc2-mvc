@@ -18,9 +18,14 @@ router.post('/write', function(req, res){
         title : req.body.title,
         content : req.body.content
     });
-    post.save(function(err){
-        res.redirect('/posts');
-    });
+    var validationError = post.validateSync();
+    if(validationError){
+        res.send(validationError);
+    }else{
+        post.save(function(err){
+            res.redirect('/posts');
+        });
+    }
 });
 
 router.get('/detail/:id', function(req, res){
@@ -67,9 +72,12 @@ router.post('/edit/:id', function(req, res){
         title : req.body.title,
         content : req.body.content
     };
-    PostModel.update({ id : req.params.id }, { $set : query }, function(err){
-        res.redirect('/posts/detail/' + req.params.id );
-    });
+    var post = new PostModel(query);
+    if(!post.validateSync()){
+        PostModel.update({ id : req.params.id }, { $set : query }, function(err){
+            res.redirect('/posts/detail/' + req.params.id );
+        });
+    }
 });
 
 router.get('/delete/:id', function(req, res){

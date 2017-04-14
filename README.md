@@ -14,8 +14,8 @@ POST /posts/edit/:id<br />
 
 GET /posts/delete/:id => 글삭제<br />
 
-GET /posts/ajax_comment/insert => 댓글 추가<br />
-GET /posts/ajax_comment/delete => 댓글 삭제<br />
+POST /posts/ajax_comment/insert => 댓글 추가<br />
+POST /posts/ajax_comment/delete => 댓글 삭제<br />
 
 
 ### Model
