@@ -17,6 +17,11 @@ GET /posts/delete/:id => 글삭제<br />
 POST /posts/ajax_comment/insert => 댓글 추가<br />
 POST /posts/ajax_comment/delete => 댓글 삭제<br />
 
+GET /accounts/join => 회원가입 템플릿<br />
+POST /accounts/join <br />
+GET /accounts/login => 로그인 템플릿<br />
+
+
 
 ### Model
 
@@ -30,6 +35,11 @@ Comment
 - created_at : 작성일
 - post_id : Post의 id
 
+User
+- username : 아이디
+- password : 비밀번호
+- created_at : 가입일
+
 ### View
 
 <pre>
@@ -37,13 +47,18 @@ Comment
 │
 ├─ footer.ejs                        #  하단 공통       
 │    
-└── posts                           
+├── posts                           
+│      │
+│      ├─ list.ejs                  #  리스트
+│      │
+│      ├─ detail.ejs                #  글 상세
+│      │
+│      └─ form.ejs                  #  글 입력폼
+│
+└── accounts
         │
-        ├─ list.ejs                  #  리스트
+        ├─ join.ejs                  #  회원가입
         │
-        ├─ detail.ejs                #  글 상세
-        │
-        └─ form.ejs                  #  글 입력폼
-
+        └─ login.ejs                 #  로그인
 
 </pre>
