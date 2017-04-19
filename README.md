@@ -18,8 +18,14 @@ POST /posts/ajax_comment/insert => 댓글 추가<br />
 POST /posts/ajax_comment/delete => 댓글 삭제<br />
 
 GET /accounts/join => 회원가입 템플릿<br />
-POST /accounts/join <br />
+POST /accounts/join => 회원가입 액션<br />
 GET /accounts/login => 로그인 템플릿<br />
+POST /accounts/login => 로그인 액션<br />
+
+GET /auth/facebook => 페이스북 로그인으로 이동<br />
+GET /auth/facebook/callback => 페이스북 인증 성공,실패에 따라 분기해줌<br />
+
+
 
 
 
