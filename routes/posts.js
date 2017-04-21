@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var PostModel = require('../models/PostModel');
 var CommentModel = require('../models/CommentModel');
+var loginRequired = require('../libs/loginRequired');
 
 // csrf 셋팅
 var csrf = require('csurf');
@@ -31,11 +32,11 @@ router.get('/', function(req, res){
     });
 });
 
-router.get('/write', csrfProtection ,function(req, res){
+router.get('/write', loginRequired , csrfProtection ,function(req, res){
     res.render('posts/form' , { post : "" , csrfToken : req.csrfToken() });
 });
 
-router.post('/write',upload.single('thumbnail') , csrfProtection , function(req, res){
+router.post('/write', loginRequired , upload.single('thumbnail') , csrfProtection , function(req, res){
     var post = new PostModel({
         title : req.body.title,
         content : req.body.content,
@@ -84,13 +85,13 @@ router.post('/ajax_comment/delete', function(req, res){
     }
 });
 
-router.get('/edit/:id', csrfProtection ,function(req, res){
+router.get('/edit/:id', loginRequired , csrfProtection ,function(req, res){
     PostModel.findOne({ id : req.params.id } , function(err, post){
         res.render('posts/form', { post : post, csrfToken : req.csrfToken() });
     });
 });
 
-router.post('/edit/:id', upload.single('thumbnail'), csrfProtection, function(req, res){
+router.post('/edit/:id', loginRequired , upload.single('thumbnail'), csrfProtection, function(req, res){
     //그 이전 파일명을 먼저 받아온다.
     PostModel.findOne( {id : req.params.id} , function(err, post){
 
