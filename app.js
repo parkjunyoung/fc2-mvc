@@ -34,6 +34,7 @@ var users = require('./routes/users');
 var posts = require('./routes/posts');
 var accounts = require('./routes/accounts');
 var auth = require('./routes/auth');
+var chat = require('./routes/chat');
 
 var app = express();
 
@@ -83,6 +84,7 @@ app.use('/users', users);
 app.use('/posts', posts);
 app.use('/accounts', accounts);
 app.use('/auth', auth);
+app.use('/chat', chat);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -101,5 +103,17 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+//socket io 셋팅
+app.io = require('socket.io')();
+/*
+app.io.on('connection', function(socket){
+  console.log('socketio connected...');
+});
+*/
+require('./libs/socketConnection')(app.io);
+ 
+
 
 module.exports = app;
