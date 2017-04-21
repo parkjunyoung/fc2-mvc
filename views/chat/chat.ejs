@@ -46,13 +46,22 @@
 <script src="/socket.io/socket.io.js"></script>  
 <script>
 (function(){
-
     var socket = io();
-
-    socket.on('chat message', function(data){
-        $('#chatBody').append('<li>' + data + '</li>');
+    function updateUserList(userList){
+        $('#userList').html("");
+        for(var key in userList){
+            $('#userList').append('<li>' + userList[key] + '</li>');
+        }
+    }
+    socket.on('join', function(data){
+        updateUserList(data);
     });
-
+    socket.on('leave', function(data){
+        updateUserList(data);
+    });
+    socket.on('chat message', function(data){
+        $('#chatBody').append('<li><strong>'+ data.displayname +'</strong>' + data.message + '</li>');
+    });
     $(document).ready(function() {
         $('#sendForm').submit(function(){
             var $massage = $('#sendForm input[name=message]');
@@ -61,7 +70,6 @@
             return false;
         });
     });
-
 })();
 </script>
 <% include ../footer.ejs %>
