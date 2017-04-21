@@ -41,7 +41,8 @@ router.get('/join', function(req, res){
 router.post('/join', function(req, res){
     var User = new UserModel({
         username : req.body.username,
-        password : passwordHash(req.body.password)
+        password : passwordHash(req.body.password),
+        displayname : req.body.displayname
     });
     User.save(function(err){
         res.send('<script>alert("회원가입 성공");location.href="/accounts/login";</script>');
